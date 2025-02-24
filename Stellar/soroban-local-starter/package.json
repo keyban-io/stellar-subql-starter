@@ -1,0 +1,37 @@
+{
+  "name": "soroban-local-starter",
+  "version": "0.0.1",
+  "description": "This project can be use as a starting point for developing your new Stellar Soroban Test Network SubQuery project",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "subql build",
+    "codegen": "subql codegen",
+    "start:docker": "docker compose pull && docker compose up --remove-orphans",
+    "dev": "subql codegen && subql build && docker compose pull && docker compose up --remove-orphans",
+    "prepack": "rm -rf dist && npm run build",
+    "test": "subql build && subql-node-stellar test"
+  },
+  "homepage": "https://github.com/subquery/stellar-subql-starter",
+  "repository": "github:subquery/stellar-subql-starter",
+  "files": [
+    "dist",
+    "schema.graphql",
+    "project.yaml"
+  ],
+  "author": "SubQuery Team",
+  "license": "MIT",
+  "dependencies": {
+    "@stellar/stellar-sdk": "13.1.0",
+    "@subql/common": "5.4.0",
+    "@subql/types-core": "2.0.1",
+    "@subql/types-stellar": "4.1.0",
+    "soroban-client": "^1.0.1",
+    "tslib": "2.8.1"
+  },
+  "devDependencies": {
+    "@subql/cli": "5.6.0",
+    "@subql/testing": "2.2.3",
+    "@subql/types": "3.12.0",
+    "typescript": "5.7.3"
+  }
+}
