@@ -1,4 +1,0 @@
-type Increment @entity {
-  id: ID!
-  newValue: BigInt!
-}
