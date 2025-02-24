@@ -40,10 +40,10 @@ const project: StellarProject = {
      * If you use a rate limited endpoint, adjust the --batch-size and --workers parameters
      * These settings can be found in your docker-compose.yaml, they will slow indexing but prevent your project being rate limited
      */
-    endpoint: ["http://stellar:8000/soroban/rp"],
+    endpoint: ["http://stellar:8000/soroban/rpc"],
     /* This is a specific Soroban endpoint
       It is only required when you are using a soroban/EventHandler */
-    sorobanEndpoint: "http://stellar:8000/soroban/rp",
+    sorobanEndpoint: "http://stellar:8000/soroban/rpc",
   },
   dataSources: [
     {
