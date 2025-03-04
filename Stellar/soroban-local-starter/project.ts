@@ -56,34 +56,6 @@ const project: StellarProject = {
           {
             handler: "handleOperation",
             kind: StellarHandlerKind.Operation,
-            filter: {
-              type: Horizon.HorizonApi.OperationResponseType.payment,
-            },
-          },
-          {
-            handler: "handleCredit",
-            kind: StellarHandlerKind.Effects,
-            filter: {
-              type: "account_credited",
-            },
-          },
-          {
-            handler: "handleDebit",
-            kind: StellarHandlerKind.Effects,
-            filter: {
-              type: "account_debited",
-            },
-          },
-          {
-            handler: "handleEvent",
-            kind: StellarHandlerKind.Event,
-            filter: {
-              /* You can optionally specify a smart contract address here
-                contractId: "" */
-              topics: [
-                "transfer", // Topic signature(s) for the events, there can be up to 4
-              ],
-            },
           },
         ],
       },

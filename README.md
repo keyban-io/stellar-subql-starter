@@ -1,6 +1,6 @@
 # Stellar
 
-## SubQuery x Stellar 
+## SubQuery x Stellar
 
 Run Stellar & postgres
 
