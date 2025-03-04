@@ -9,7 +9,8 @@
     "start:docker": "docker compose pull && docker compose up --remove-orphans",
     "dev": "subql codegen && subql build && docker compose pull && docker compose up --remove-orphans",
     "prepack": "rm -rf dist && npm run build",
-    "test": "subql build && subql-node-stellar test"
+    "test": "subql build && subql-node-stellar test",
+    "start": "subql codegen && subql build && subql-node-stellar -f ."
   },
   "homepage": "https://github.com/subquery/stellar-subql-starter",
   "repository": "github:subquery/stellar-subql-starter",
@@ -21,8 +22,11 @@
   "author": "SubQuery Team",
   "license": "MIT",
   "dependencies": {
+    "@polkadot/api": "^15.6.1",
     "@stellar/stellar-sdk": "13.1.0",
     "@subql/common": "5.4.0",
+    "@subql/common-stellar": "^4.2.2",
+    "@subql/node-stellar": "^4.4.0",
     "@subql/types-core": "2.0.1",
     "@subql/types-stellar": "4.1.0",
     "soroban-client": "^1.0.1",

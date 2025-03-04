@@ -1,9 +1,15 @@
 services:
   stellar:
-    image: stellar/quickstart:testing
-    command: ["--local", "--enable-soroban-rpc"]
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: ["--local", "--enable-soroban-rpc", "--limits unlimited"]
     ports:
       - "8000:8000"
+    volumes:
+      - ./stellar-core.cfg:/opt/stellar-default/local/core/etc/stellar-core.cfg
+      - ./stellar-captive-core.cfg:/opt/stellar-default/local/horizon/etc/stellar-captive-core.cfg
+      - ./horizon.env:/opt/stellar-default/local/horizon/etc/horizon.env
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://stellar:8000"]
@@ -26,50 +32,50 @@ services:
       timeout: 5s
       retries: 5
 
-  subquery-node:
-    image: subquerynetwork/subql-node-stellar:latest
-    depends_on:
-      "postgres":
-        condition: service_healthy
-    restart: unless-stopped
-    environment:
-      DB_USER: postgres
-      DB_PASS: postgres
-      DB_DATABASE: postgres
-      DB_HOST: postgres
-      DB_PORT: 5432
-    volumes:
-      - ./:/app
-    command:
-      - ${SUB_COMMAND:-} # set SUB_COMMAND env variable to "test" to run tests
-      - -f=/app
-      - --db-schema=app
-      - --workers=1 # The more the faster
-      - --batch-size=5 # The higher the faster, set low to avoid rate limit on SDF endpoint
-      - --unsafe
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://subquery-node:3000/ready"]
-      interval: 3s
-      timeout: 5s
-      retries: 10
+  # subquery-node:
+  #   image: subquerynetwork/subql-node-stellar:latest
+  #   depends_on:
+  #     "postgres":
+  #       condition: service_healthy
+  #   restart: unless-stopped
+  #   environment:
+  #     DB_USER: postgres
+  #     DB_PASS: postgres
+  #     DB_DATABASE: postgres
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #   volumes:
+  #     - ./:/app
+  #   command:
+  #     - ${SUB_COMMAND:-} # set SUB_COMMAND env variable to "test" to run tests
+  #     - -f=/app
+  #     - --db-schema=app
+  #     - --workers=1 # The more the faster
+  #     - --batch-size=5 # The higher the faster, set low to avoid rate limit on SDF endpoint
+  #     - --unsafe
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://subquery-node:3000/ready"]
+  #     interval: 3s
+  #     timeout: 5s
+  #     retries: 10
 
-  graphql-engine:
-    image: subquerynetwork/subql-query:latest
-    ports:
-      - 3000:3000
-    depends_on:
-      "postgres":
-        condition: service_healthy
-      "subquery-node":
-        condition: service_healthy
-    restart: always
-    environment:
-      DB_USER: postgres
-      DB_PASS: postgres
-      DB_DATABASE: postgres
-      DB_HOST: postgres
-      DB_PORT: 5432
-    command:
-      - --name=app
-      - --playground
-      - --indexer=http://subquery-node:3000
+  # graphql-engine:
+  #   image: subquerynetwork/subql-query:latest
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     "postgres":
+  #       condition: service_healthy
+  #     "subquery-node":
+  #       condition: service_healthy
+  #   restart: always
+  #   environment:
+  #     DB_USER: postgres
+  #     DB_PASS: postgres
+  #     DB_DATABASE: postgres
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #   command:
+  #     - --name=app
+  #     - --playground
+  #     - --indexer=http://subquery-node:3000
