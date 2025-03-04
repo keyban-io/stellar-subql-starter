@@ -57,8 +57,17 @@ const project: StellarProject = {
             handler: "handleOperation",
             kind: StellarHandlerKind.Operation,
           },
+          {
+            handler: "handleEvent",
+            kind: StellarHandlerKind.Event,
+            filter: {
+              topics: [
+                "transfer",
+              ],
+            },
+          },
         ],
-      },
+      }
     },
   ],
 };

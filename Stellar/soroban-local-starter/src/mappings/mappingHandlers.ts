@@ -16,3 +16,9 @@ export async function handleOperation(
 ): Promise<void> {
   logger.info(`Indexing operation ${op.id}, type: ${op.type}, ledger: ${op.transaction?.hash}`);
 }
+
+export async function handleEvent(event: SorobanEvent): Promise<void> {
+  logger.info(
+    `New transfer event found at block ${event.ledger!.sequence.toString()}`
+  );
+}
