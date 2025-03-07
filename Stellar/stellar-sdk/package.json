@@ -6,6 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "pnpm build && node dist/index.js",
+    "sign": "pnpm build && node dist/sign.js",
+    "balance": "pnpm build && node dist/balance.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

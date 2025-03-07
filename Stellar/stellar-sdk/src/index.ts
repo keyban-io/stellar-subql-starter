@@ -36,6 +36,7 @@ const rpcUrl = "http://localhost:8000/soroban/rpc";
 
   // Load the account (getting the sequence number for the account and making an account object.)
   RpcServer.getAccount(publicKey).then((account) => {
+    console.log("accountId:", account.accountId());
     console.log("sequence:", account.sequenceNumber());
   }).catch((e) => {
     console.log("error:", e);
