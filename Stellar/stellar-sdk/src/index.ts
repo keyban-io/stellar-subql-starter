@@ -8,7 +8,8 @@ import {
     Operation,
   } from "@stellar/stellar-sdk";
 
-const rpcUrl = "http://localhost:8000/soroban/rpc";
+const rpcUrl = process.env.RPC_URL || "http://localhost:8000/soroban/rpc";
+const friendbotUrl = process.env.FRIENDBOT_URL || "http://localhost:8000/friendbot";
 
 (async () => {
   // Initialize the rpcServer
@@ -28,7 +29,7 @@ const rpcUrl = "http://localhost:8000/soroban/rpc";
   console.log("publicKey:", publicKey);
 
   // Fund the account
-  await fetch(`http://localhost:8000/friendbot?addr=${publicKey}`).then(
+  await fetch(`${friendbotUrl}?addr=${publicKey}`).then(
     (res) => {
       console.log(`funded account: ${publicKey}`);
     },

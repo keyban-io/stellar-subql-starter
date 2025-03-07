@@ -9,10 +9,10 @@ import {
     Operation,
     Asset,
   } from "@stellar/stellar-sdk";
+import { argv } from "process";
 
-const horizonUrl = "http://localhost:8000";
-
-const publicKey = process.env.PUBLIC_KEY;
+const horizonUrl = process.env.HORIZON_URL || "http://localhost:8000";
+const publicKey = argv[2];
 
 if (!publicKey) {
   console.error("Public Key is required");

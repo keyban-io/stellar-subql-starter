@@ -13,9 +13,7 @@ import {
   } from "@stellar/stellar-sdk";
 import { argv } from "process";
 
-const rpcUrl = "http://localhost:8000/soroban/rpc";
-
-// Get the access token from environment variables
+const rpcUrl = process.env.RPC_URL || "http://localhost:8000/soroban/rpc";
 const hexPublicKey = argv[2];
 const transactionXDR = argv[3];
 const signature = argv[4];

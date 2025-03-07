@@ -13,8 +13,8 @@ import {
 import { copyFileSync } from "fs";
 import { argv } from "process";
 
-const rpcUrl = "http://localhost:8000/soroban/rpc";
-
+const rpcUrl = process.env.RPC_URL || "http://localhost:8000/soroban/rpc";
+const friendbotUrl = process.env.FRIENDBOT_URL || "http://localhost:8000/friendbot";
 const hexPublicKey = argv[2];
 
 (async () => {
@@ -33,7 +33,7 @@ const hexPublicKey = argv[2];
   console.log("Imported Keypair Public Key:", keypair.publicKey());
 
   // Fund the account
-  await fetch(`http://localhost:8000/friendbot?addr=${keypair.publicKey()}`).then(
+  await fetch(`${friendbotUrl}?addr=${keypair.publicKey()}`).then(
     () => {
       console.log(`funded account: ${keypair.publicKey()}`);
     },
