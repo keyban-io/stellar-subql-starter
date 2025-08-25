@@ -1,0 +1,45 @@
+{
+  "name": "soroban-testnet-starter",
+  "version": "0.0.1",
+  "description": "This project can be use as a starting point for developing your new Stellar Soroban Test Network SubQuery project",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "subql build",
+    "codegen": "subql codegen",
+    "start:docker": "docker compose pull && docker compose up --remove-orphans",
+    "dev": "subql codegen && subql build && docker compose pull && docker compose up --remove-orphans",
+    "prepack": "rm -rf dist && npm run build",
+    "test": "subql build && subql-node-stellar test"
+  },
+  "homepage": "https://github.com/subquery/stellar-subql-starter",
+  "repository": "github:subquery/stellar-subql-starter",
+  "files": [
+    "dist",
+    "schema.graphql",
+    "project.yaml"
+  ],
+  "author": "SubQuery Team",
+  "license": "MIT",
+  "dependencies": {
+    "@polkadot/api": "^16.4.1",
+    "@stellar/stellar-sdk": "^14.0.0-rc.3",
+    "@stellar/stellar-base": "^14.0.0-rc.3",
+    "@subql/common": "^5.7.2",
+    "@subql/common-stellar": "^4.4.3",
+    "@subql/node-stellar": "^6.0.3-0",
+    "@subql/query": "^2.23.2",
+    "@subql/types-core": "^2.1.1",
+    "@subql/types-stellar": "^5.0.1",
+    "jsonc-parser": "^3.3.1",
+    "node-fetch": "^2.7.0",
+    "text-encoding": "^0.7.0",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@subql/cli": "^6.0.2",
+    "@subql/testing": "^2.3.0",
+    "@subql/types": "^3.14.1",
+    "typescript": "^5.9.2"
+  },
+  "packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
+}
